@@ -1,9 +1,8 @@
-import React from 'react';
 import Link from 'next/link';
 
 function AuthLinks() {
 
-    const status = "notauthenticated"
+    const status = "notauthenticated";
 
     return (
         <>

@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import { useState } from 'react';
 import Link from 'next/link';
 import { faBars, faX } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -38,4 +38,4 @@ function MobileMenu() {
     )
 }
 
-export default MobileMenu
+export default MobileMenu;
