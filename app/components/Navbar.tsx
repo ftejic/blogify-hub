@@ -4,7 +4,7 @@ import MobileMenu from "@/app/components/MobileMenu";
 
 function Navbar() {
   return (
-    <div className='Navbar fixed w-full left-0 top-0 bg-bg border-b border-text border-opacity-20'>
+    <div className='Navbar fixed w-full left-0 top-0 bg-black border-b border-gray'>
       <div className='container mx-auto px-5 sm:px-8 md:px-10 flex justify-between py-5'>
         <div className="logo uppercase font-bold text-xl md:text-3xl">BlogifyHub</div>
         <div className="links">

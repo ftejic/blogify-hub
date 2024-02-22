@@ -25,7 +25,7 @@ function MobileMenu() {
                 className="relative z-50"
             />
             {open && (
-                <div className="flex flex-col gap-3 absolute top-[68px] mr-auto px-5 py-5 left-0 w-full min-h-screen text-center bg-bg text-text">
+                <div className="flex flex-col gap-3 absolute top-[68px] mr-auto px-5 py-5 left-0 w-full min-h-screen text-center bg-black text-white">
                     <Link href="/">Home</Link>
                     <Link href="/">Contact</Link>
                     <Link href="/">About</Link>

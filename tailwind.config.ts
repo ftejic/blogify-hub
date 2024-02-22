@@ -9,11 +9,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        "bg": "#04070A",
-        "text": "#EDF1F6",
-        "primary": "#a2bcd8",
-        "secondary": "#2d5076",
-        "accent": "#447dbd",
+        "black": "#04070A",
+        "white": "#EDF1F6",
+        "gray": "#808080",
+        "grayBlue": "#536171",
+        "darkBlue": "#254160",
+        "lightBlue": "#427bbd",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

@@ -3,11 +3,12 @@
 @tailwind utilities;
 
 :root{
-  --bg: #04070A;
-  --text: #EDF1F6;
-  --primary: #a2bcd8;
-  --secondary: #2d5076;
-  --accent: #447dbd;
+  --black: #04080b;
+  --white: #eff2f6;
+  --gray: #808080;
+  --grayBlue: #536171;
+  --darkBlue: #254160;
+  --lightBlue: #427bbd;
 }
 
 *{
@@ -23,4 +24,23 @@ body{
 
 a{
   text-decoration: none;
+}
+
+.ql-editor > p{
+  font-size: 20px;
+}
+
+.quill > .ql-container > .ql-editor.ql-blank::before{
+  color: var(--gray);
+  opacity: 50%;
+  font-size: 20px;
+  left: 0;
+}
+
+.ql-editor, .ql-editor.ql-blank{
+  padding: 12px 0!important;
+}
+
+.ql-bubble .ql-editor h2 {
+  font-size: 24px!important;
 }

@@ -14,7 +14,7 @@ function SinglePostPage() {
                     <div className="relative w-12 h-12  -z-10">
                         <Image src="/images/luca-bravo-XJXWbfSo2f0-unsplash.jpg" alt='' fill priority={true} className='object-cover relative rounded-full'/>
                     </div>
-                    <div className="flex flex-col text-base text-text text-opacity-50">
+                    <div className="flex flex-col text-base text-gray">
                         <span className="font-medium">Filip Tejic</span>
                         <span>12.23.1933</span>
                     </div>
