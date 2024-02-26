@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import prisma from "@/app/utils/connect";
 import { getAuthSession } from "@/app/utils/auth";
 
-
 interface Session {
     user?: {
         name?: string | null | undefined;
@@ -11,37 +10,23 @@ interface Session {
     } | null | undefined;
 }
 
-
+//Get Comments
 export async function GET(req: Request) {
 
-    const {searchParams} = new URL(req.url);
-
-    const page = searchParams.get("page");
-    const parsedPage = page != null ? parseInt(page) : 1
-
-    const cat = searchParams.get("cat");
-
-    const POST_PER_PAGE = 3;
+    const { searchParams } = new URL(req.url);
+    const postSlug = searchParams.get("postSlug");
 
     try{
 
-        const [posts, count] = await prisma.$transaction([
-            prisma.post.findMany({
-                take: POST_PER_PAGE,
-                skip: POST_PER_PAGE * (parsedPage - 1),
-                where: {
-                    ...(cat && {catSlug: cat})
-                }
-            }),
-            prisma.post.count({
-                where: {
-                    ...(cat && {catSlug: cat})
-                }
-            }),
-        ]);
+        const comments = await prisma.comment.findMany({
+            where: { 
+                ...(postSlug && { postSlug }),
+             },
+            include: {user: true},
+        })
 
         return new NextResponse(
-            JSON.stringify({ posts, count }),
+            JSON.stringify(comments),
             {status: 200}
         );
 
@@ -55,10 +40,12 @@ export async function GET(req: Request) {
 };
 
 
-//Create Post
+//Create Comment
 export async function POST(req: Request) {
 
     const session: Session | null = await getAuthSession();
+
+    console.log(session)
 
     if(!session) {
         return new NextResponse(
@@ -71,12 +58,12 @@ export async function POST(req: Request) {
 
         const body = await req.json();
 
-        const post = await prisma.post.create({
-            data: {...body, userEmail: session?.user?.email},
+        const comment = await prisma.comment.create({
+            data: {...body, userEmail: session?.user?.email}
         })
 
         return new NextResponse(
-            JSON.stringify(post),
+            JSON.stringify(comment),
             {status: 200}
         );
 

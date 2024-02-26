@@ -52,6 +52,7 @@ async function CardList(props : Props) {
         {data?.posts.map((item: any) => (
           <Card 
             key={item._id}
+            slug={item.slug}
             createdAt={item.createdAt}
             title={item.title}
             desc={item.desc}
