@@ -1,9 +1,11 @@
 import Pagination from "@/app/components/Pagination";
-import Card from "@/app/components/Card"
+import Card from "@/app/components/Card";
+import { headers } from "next/headers";
 
 interface Props {
   page: number;
   cat?: string;
+  myPosts?: string;
 }
 
 interface Post {
@@ -23,22 +25,33 @@ interface Data {
   count: number;
 }
 
-const getData = async (page: number, cat: string | undefined) => {
-  const res = await fetch(`${process.env.BASEURL}/api/posts?cat=${cat || ""}&page=${page}`, {
-    cache: "no-cache"
+const getData = async (page: number, cat: string | undefined, myPosts: string | undefined) => {
+  
+  const url = myPosts ? 
+              `${process.env.BASEURL}/api/my-posts?page=${page}` :
+              `${process.env.BASEURL}/api/posts?cat=${cat || ""}&page=${page}`;
+
+  const cookie = headers().get('cookie')
+
+  const res = await fetch(url, {
+    method: "GET",
+    headers: {
+      "Cookie": cookie || "",
+    },
+    cache: "no-cache",
   });
 
   if (!res.ok) {
+    console.error(`Failed to fetch data. Status: ${res.status}, Status Text: ${res.statusText}`);
     throw new Error("Failed!");
   }
 
   return res.json();
-
 }
 
 async function CardList(props : Props) {
 
-  const data : Data = await getData(props.page, props.cat);
+  const data : Data = await getData(props.page, props.cat, props.myPosts);
 
   const POST_PER_PAGE = 3;
 
@@ -46,8 +59,7 @@ async function CardList(props : Props) {
   const hasNext = POST_PER_PAGE * (props.page - 1) + POST_PER_PAGE < data.count;
 
   return (
-    <div className='lg:w-4/6'>
-      <h1 className="text-2xl font-bold mb-5">Recent Posts</h1>
+    <div>
       <div className="flex flex-col gap-10">
         {data?.posts.map((item: any) => (
           <Card 

@@ -29,7 +29,8 @@ interface Data {
 
 const getData = async (slug: string) => {
     const res = await fetch(`${process.env.BASEURL}/api/posts/${slug}`, {
-      cache: "no-cache"
+        method: "GET",
+        cache: "no-cache"
     });
   
     if (!res.ok) {

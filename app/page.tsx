@@ -17,9 +17,11 @@ export default function Home({searchParams} : {searchParams : SearchParams}) {
       <Featured />
       <CategoryList />
       <div className="flex">
-        <CardList 
-          page = {page}
-        />
+        <div className="w-full lg:w-4/6">
+          <CardList 
+            page={page}
+          />
+        </div>
         <Menu />
       </div>
     </div>

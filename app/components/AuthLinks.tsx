@@ -11,6 +11,7 @@ function AuthLinks() {
             {
                 status === "authenticated" ? (
                     <>
+                        <Link href="/my-posts">My Posts</Link>
                         <Link href="/write">Write</Link>
                         <span onClick={() => signOut()} className='cursor-pointer'>Logout</span>
                         

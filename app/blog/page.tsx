@@ -15,11 +15,15 @@ function BlogPage({searchParams} : {searchParams : SearchParams}) {
     <div>
         <h1 className="text-4xl font-bold text-center py-3 my-5 bg-darkBlue">{cat}</h1>
         <div className='flex'>
+          <div className='w-full lg:w-4/6'>
+            <h1 className="text-2xl font-bold mb-5">Recent Posts</h1>
             <CardList 
               page={page}
               cat={cat}
             />
-            <Menu />
+          </div>
+          
+          <Menu />
         </div>
     </div>
   )

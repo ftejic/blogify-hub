@@ -20,16 +20,17 @@ function WritePage() {
     const router = useRouter();
     
     const [file, setFile] = useState<File | null>(null);
-    const [media, setMedia] = useState("");
     const [value, setValue] = useState("");
     const [title, setTitle] = useState("");
-     
+
+    useEffect(() => {
+        if (status === 'unauthenticated') {
+          router.push('/');
+        }
+      }, [status, router]);
 
     if(status === "loading") {
         return <div>Loading...</div>
-    }
-    if(status === "unauthenticated") {
-        router.push("/");
     }
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,9 +39,7 @@ function WritePage() {
         }
     };     
     
-    const handleUploadComplete = async (downloadURL: string) => {
-
-        setMedia(downloadURL);
+    const handleUploadComplete = async (downloadURL: string | null) => {
 
         const res = await fetch("api/posts/", {
             method: "POST",
@@ -61,28 +60,33 @@ function WritePage() {
         const storageRef = ref(storage, name);
         const uploadTask = file && uploadBytesResumable(storageRef, file);
         
-        uploadTask?.on('state_changed', 
-            (snapshot) => {
-            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log('Upload is ' + progress + '% done');
-            switch (snapshot.state) {
-                case 'paused':
-                console.log('Upload is paused');
-                break;
-                case 'running':
-                console.log('Upload is running');
-                break;
-            }
-            }, 
-            (error) => {
-                console.log(error);
-            }, 
-            () => {
-                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                    handleUploadComplete(downloadURL)
-                });
-            }
-        );    
+        if(file) {        
+            uploadTask?.on('state_changed', 
+                (snapshot) => {
+                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                console.log('Upload is ' + progress + '% done');
+                switch (snapshot.state) {
+                    case 'paused':
+                    console.log('Upload is paused');
+                    break;
+                    case 'running':
+                    console.log('Upload is running');
+                    break;
+                }
+                }, 
+                (error) => {
+                    console.log(error);
+                }, 
+                () => {
+                    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                        handleUploadComplete(downloadURL)
+                    });
+                }
+            );    
+        } else {
+            handleUploadComplete(null)
+        }
+
     }
     
 
