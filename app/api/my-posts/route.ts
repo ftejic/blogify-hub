@@ -30,7 +30,7 @@ export async function GET(req: Request) {
         );
     }
 
-    const POST_PER_PAGE = 3;
+    const POST_PER_PAGE = 10;
 
     try{
         
@@ -40,6 +40,9 @@ export async function GET(req: Request) {
                 skip: POST_PER_PAGE * (parsedPage - 1),
                 where: {
                     ...(session && {userEmail: session?.user?.email} as {userEmail : string})
+                },
+                orderBy: {
+                    createdAt: 'desc',
                 }
             }),
             prisma.post.count({

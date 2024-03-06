@@ -26,7 +26,7 @@ interface Data {
 }
 
 const getData = async (page: number, cat: string | undefined, myPosts: string | undefined) => {
-  
+
   const url = myPosts ? 
               `${process.env.BASEURL}/api/my-posts?page=${page}` :
               `${process.env.BASEURL}/api/posts?cat=${cat || ""}&page=${page}`;
@@ -38,7 +38,6 @@ const getData = async (page: number, cat: string | undefined, myPosts: string | 
     headers: {
       "Cookie": cookie || "",
     },
-    cache: "no-cache",
   });
 
   if (!res.ok) {

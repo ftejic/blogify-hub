@@ -12,6 +12,8 @@ export default function Home({searchParams} : {searchParams : SearchParams}) {
 
   const page = searchParams?.page ? parseInt(searchParams.page) : 1;
 
+  
+
   return (
     <div>
       <Featured />

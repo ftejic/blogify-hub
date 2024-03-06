@@ -31,6 +31,9 @@ export async function GET(req: Request) {
                 skip: POST_PER_PAGE * (parsedPage - 1),
                 where: {
                     ...(cat && {catSlug: cat}),
+                },
+                orderBy: {
+                    createdAt: 'desc',
                 }
             }),
             prisma.post.count({

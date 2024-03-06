@@ -8,6 +8,8 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { app } from '@/app/utils/firebase'; 
+import Select from 'react-select';
+
 
 
 const storage = getStorage(app);
@@ -20,8 +22,9 @@ function WritePage() {
     const router = useRouter();
     
     const [file, setFile] = useState<File | null>(null);
-    const [value, setValue] = useState("");
+    const [desc, setDesc] = useState("");
     const [title, setTitle] = useState("");
+    const [category, setCategory] = useState({value: "Code", label: "Code"});
 
     useEffect(() => {
         if (status === 'unauthenticated') {
@@ -45,10 +48,10 @@ function WritePage() {
             method: "POST",
             body: JSON.stringify({
                 title,
-                desc: value,
+                desc,
                 img: downloadURL,
                 slug: title.toLowerCase().trim().replace(/[^\w\s-]/g, "").replace(/[\s_-]/g, "-").replace(/^-+|-+$/g, ""),
-                catSlug: "Tech"
+                catSlug: category.value
             })
         });
         
@@ -89,13 +92,58 @@ function WritePage() {
 
     }
     
+    const handleSelectChange = (selectedOption: any) => {
+        setCategory(selectedOption);
+    };
+    
+    console.log(category)
 
   return (
     <div className='pt-10'>
         <input type="text" placeholder="Title" onChange={e => setTitle(e.target.value)} value={title} className='bg-transparent placeholder:text-gray text-4xl outline-none mb-5'/>
+        <Select 
+            options={[
+                {value: 'Code', label: 'Code'},
+                {value: 'Tech', label: 'Tech'},
+                {value: 'Security', label: 'Security'},
+                {value: 'Gadgets', label: 'Gadgets'},
+                {value: 'Insights', label: 'Insights'},
+                {value: 'Innovation', label: 'Innovation'},
+            ]}
+            isClearable={true}
+            isSearchable={true}
+            styles={{
+                control: (baseStyles, state) => ({
+                    ...baseStyles,
+                    background: state.isFocused ? "#eff2f6" : "#eff2f6",
+                    color: "#04080b",
+                }),
+                option: (baseStyles, state) => ({
+                    ...baseStyles,
+                    color: "#04080b",
+                    background: state.isSelected ? "#254160" : state.isFocused ? "#808080" : "eff2f6",
+                }),
+                input: (baseStyles, state) => ({
+                    ...baseStyles,
+                    color: "#04080b",
+                }),
+                placeholder: (baseStyles, state) => ({
+                    ...baseStyles,
+                    color: "#808080",
+                }),
+                singleValue: (baseStyles, state) => ({
+                    ...baseStyles,
+                    color: "#254160",
+                }),
+            }}
+            placeholder={"Select category..."}
+            className='max-w-xs mb-5'
+            value={category}
+            onChange={handleSelectChange}
+        />
         <div>
             <div className='flex items-center gap-5'>
-                <input type="file" id="image" onChange={handleFileChange} className='absolute opacity-0'/>
+                <input type="file" id="image" onChange={handleFileChange} className='absolute opacity-0 w-7'/>
                 <button className='text-3xl'>
                     <FontAwesomeIcon
                         icon={faSquarePlus}
@@ -103,7 +151,7 @@ function WritePage() {
                     />
                 </button>
             </div>        
-            <ReactQuill theme='bubble' value={value} onChange={setValue} placeholder='Tell your story...'/>
+            <ReactQuill theme='bubble' value={desc} onChange={setDesc} placeholder='Tell your story...'/>
         </div>
         <button onClick={handleSubmit} className='mt-10 bg-bg text-white outline-none border border-text py-2 px-4'>Publish</button>
     </div>

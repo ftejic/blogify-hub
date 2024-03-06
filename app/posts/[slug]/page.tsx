@@ -53,7 +53,7 @@ async function SinglePostPage({ params } : {params: Params}) {
             <div className="w-full lg:w-1/2">
                 <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-10">{data?.title}</h1>
                 <div className="flex items-center gap-3">
-                    <div className="relative w-12 h-12  -z-10">
+                    <div className="relative w-12 h-12 -z-10">
                         <Image src={data?.user.image} alt='' fill priority={true} className='object-cover relative rounded-full'/>
                     </div>
                     <div className="flex flex-col text-base text-gray">
@@ -61,6 +61,7 @@ async function SinglePostPage({ params } : {params: Params}) {
                         <span>{data?.createdAt.toString().slice(0, 10)}</span>
                     </div>
                 </div>
+                <p className="text-base text-gray mt-5">Views: {data?.views}</p>
             </div>
             {
                 data?.img && <div className="relative w-full lg:w-1/2 h-80 -z-10 mt-10 lg:mt-0">
