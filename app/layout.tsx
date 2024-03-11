@@ -28,7 +28,7 @@ export default function RootLayout({
             </div>     
             <Footer />       
           </div>  
-        </AuthProvider>     
+        </AuthProvider>   
       </body>
     </html>
   );

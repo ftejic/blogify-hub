@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 interface Category {
-    _id: string;
+    id: string;
     slug: string;
     title: string
 }
@@ -21,10 +21,12 @@ async function Categories() {
 
     const data: { categories: Category[] } = await getData();
 
+    //console.log(data.categories)
+
     return (
         <>
             {data?.categories.map((item: any) => (
-                <Link key={item._id} href={`/blog?cat=${item.slug}`} className='bg-grayBlue py-2 px-4'>{item.title}</Link>
+                <Link key={item.id} href={`/blog?cat=${item.slug}`} className='bg-grayBlue py-2 px-4'>{item.title}</Link>
             ))}
         </>    
     )

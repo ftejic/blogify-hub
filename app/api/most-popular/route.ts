@@ -3,27 +3,27 @@ import prisma from "@/app/utils/connect";
 
 const today = new Date();
 const startDate = new Date(today);
-startDate.setDate(today.getDate() - 30);
+startDate.setDate(today.getDate() - 60);
 
 export async function GET() {
 
     try{
-
-        const post = await prisma.post.findFirst({
-                take: 1,
+        const posts = await prisma.post.findMany({
+                take: 3,
                 where: {
                     createdAt: {
                         gte: startDate, 
                         lte: today, 
                     },
                 },
+                include: {user: true},
                 orderBy: {
                     views: 'desc'
                 }
         })
 
         return new NextResponse(
-            JSON.stringify({post}),
+            JSON.stringify({posts}),
             {status: 200}
         );
 

@@ -41,12 +41,16 @@ async function Featured() {
     <div className='pt-10'>
       <h1 className='text-2xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold'><span className='uppercase'>BlogifyHub:</span> Discover Tech Treashures</h1>
       <div className="flex flex-col lg:flex-row mt-10 gap-5 lg:gap-10">
-        {/* {
+        {
         data?.post?.img && <div className="relative w-full lg:w-1/2 h-72 md:h-96 -z-10">
-            <Image src={data?.post?.img} alt='' fill priority={true} className='object-cover relative'/>
+            <Image 
+              src={data?.post?.img} 
+              alt='' 
+              fill 
+              priority={true} 
+              className='object-cover relative'/>
           </div>
-        } */}
-        
+        }     
         <div className={`lg:${data?.post?.img ? 'w-full' : 'w-1/2'} flex items-center`}>
           <div>
             <h1 className='text-2xl md:text-4xl font-bold mb-3 lg:mb-5'>{data?.post?.title}</h1>

@@ -18,7 +18,6 @@ function AuthLinks() {
                     </>            
                 ) : (
                     <>
-                        <Link href="/">Register</Link>
                         <Link href="/login">Login</Link>
                     </>
                 )

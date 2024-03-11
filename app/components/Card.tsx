@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 interface Props {
+  id: string;
   slug: string;
   createdAt: Date;
   title: string;
@@ -13,8 +14,9 @@ interface Props {
 }
 
 const Card = (props : Props) => {
+
   return (
-    <div className="flex gap-5 items-center">
+    <div className="flex gap-5 items-center" key={props.id}>
       {
         props.img && <div className="hidden xl:block relative -z-10 w-1/2 h-80">
           <Image src={props.img} alt='' fill priority={true} className='object-cover relative'/>

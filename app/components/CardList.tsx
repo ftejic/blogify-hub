@@ -1,15 +1,19 @@
 import Pagination from "@/app/components/Pagination";
 import Card from "@/app/components/Card";
 import { headers } from "next/headers";
+import DeleteBtt from "@/app/components/DeleteBtt";
+
+import { Fragment } from "react";
 
 interface Props {
   page: number;
   cat?: string;
   myPosts?: string;
+  postPerPage?: number;
 }
 
 interface Post {
-  _id: string;
+  id: string;
   createdAt: Date;
   slug: string;
   title: string;
@@ -25,11 +29,11 @@ interface Data {
   count: number;
 }
 
-const getData = async (page: number, cat: string | undefined, myPosts: string | undefined) => {
+const getData = async (page: number, cat: string | undefined, myPosts: string | undefined, postPerPage: number | undefined) => {
 
   const url = myPosts ? 
               `${process.env.BASEURL}/api/my-posts?page=${page}` :
-              `${process.env.BASEURL}/api/posts?cat=${cat || ""}&page=${page}`;
+              `${process.env.BASEURL}/api/posts?cat=${cat || ""}&page=${page}&postPerPage=${postPerPage || ""}`;
 
   const cookie = headers().get('cookie')
 
@@ -48,30 +52,43 @@ const getData = async (page: number, cat: string | undefined, myPosts: string | 
   return res.json();
 }
 
+
+
 async function CardList(props : Props) {
 
-  const data : Data = await getData(props.page, props.cat, props.myPosts);
+  const data : Data = await getData(props.page, props.cat, props.myPosts, props.postPerPage);
 
-  const POST_PER_PAGE = 3;
+  const postPerPage = props.postPerPage || 5
 
-  const hasPrev = POST_PER_PAGE * (props.page - 1) > 0;
-  const hasNext = POST_PER_PAGE * (props.page - 1) + POST_PER_PAGE < data.count;
+  const hasPrev = postPerPage * (props.page - 1) > 0;
+  const hasNext = postPerPage * (props.page - 1) + postPerPage < data.count;
 
   return (
     <div>
       <div className="flex flex-col gap-10">
         {data?.posts.map((item: any) => (
-          <Card 
-            key={item._id}
-            slug={item.slug}
-            createdAt={item.createdAt}
-            title={item.title}
-            desc={item.desc}
-            img={item.img}
-            views={item.views}
-            catSlug={item.catSlug}
-            userEmail={item.userEmail}
-          />
+          <Fragment key={item.id}>
+            <div className="relative">
+              {props.myPosts === "true" ? 
+                <DeleteBtt 
+                  id={item.id}
+                /> : <></>
+              }           
+              <Card             
+                id={item.id}
+                slug={item.slug}
+                createdAt={item.createdAt}
+                title={item.title}
+                desc={item.desc}
+                img={item.img}
+                views={item.views}
+                catSlug={item.catSlug}
+                userEmail={item.userEmail}
+              />
+            </div>
+            
+          </Fragment>
+          
         ))}
       </div>  
       <Pagination

@@ -20,6 +20,7 @@ function BlogPage({searchParams} : {searchParams : SearchParams}) {
             <CardList 
               page={page}
               cat={cat}
+              postPerPage={10}
             />
           </div>
           

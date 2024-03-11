@@ -2,8 +2,6 @@ import Categories from "@/app/components/Categories";
 
 async function CategoryList() {
 
-
-
   return (
     <div className='CategoryList py-10'>
       <h1 className='text-2xl font-bold mb-5'>Categories</h1>

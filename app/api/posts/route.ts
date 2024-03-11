@@ -21,14 +21,15 @@ export async function GET(req: Request) {
 
     const cat = searchParams.get("cat");
 
-    const POST_PER_PAGE = 3;
+    const postPerPage = searchParams.get("postPerPage");
+    const parsedPostPerPage = postPerPage != null ? parseInt(postPerPage) : 5
 
     try{
 
         const [posts, count] = await prisma.$transaction([
             prisma.post.findMany({
-                take: POST_PER_PAGE,
-                skip: POST_PER_PAGE * (parsedPage - 1),
+                take: parsedPostPerPage,
+                skip: parsedPostPerPage * (parsedPage - 1),
                 where: {
                     ...(cat && {catSlug: cat}),
                 },

@@ -12,8 +12,6 @@ export default function Home({searchParams} : {searchParams : SearchParams}) {
 
   const page = searchParams?.page ? parseInt(searchParams.page) : 1;
 
-  
-
   return (
     <div>
       <Featured />
@@ -22,6 +20,7 @@ export default function Home({searchParams} : {searchParams : SearchParams}) {
         <div className="w-full lg:w-4/6">
           <CardList 
             page={page}
+            postPerPage={5}
           />
         </div>
         <Menu />
