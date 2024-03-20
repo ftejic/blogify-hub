@@ -44,7 +44,7 @@ function WritePage() {
     
     const handleUploadComplete = async (downloadURL: string | null) => {
 
-        const res = await fetch("api/posts/", {
+        const res = await fetch("/api/posts/", {
             method: "POST",
             body: JSON.stringify({
                 title,

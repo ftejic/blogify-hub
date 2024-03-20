@@ -45,7 +45,7 @@ function Comments(props: Props) {
     const status = useSession().status;
 
     const { data, mutate, isLoading }: {data: Data[], mutate: any, isLoading: boolean} = useSWR(
-        `http://localhost:3000/api/comments?postSlug=${props.postSlug}`,
+        `${process.env.NEXT_PUBLIC_BASEURL}/api/comments?postSlug=${props.postSlug}`,
         fetcher
     )
 

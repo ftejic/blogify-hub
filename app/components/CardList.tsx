@@ -32,8 +32,8 @@ interface Data {
 const getData = async (page: number, cat: string | undefined, myPosts: string | undefined, postPerPage: number | undefined) => {
 
   const url = myPosts ? 
-              `${process.env.BASEURL}/api/my-posts?page=${page}` :
-              `${process.env.BASEURL}/api/posts?cat=${cat || ""}&page=${page}&postPerPage=${postPerPage || ""}`;
+              `${process.env.NEXT_PUBLIC_BASEURL}/api/my-posts?page=${page}` :
+              `${process.env.NEXT_PUBLIC_BASEURL}/api/posts?cat=${cat || ""}&page=${page}&postPerPage=${postPerPage || ""}`;
 
   const cookie = headers().get('cookie')
 

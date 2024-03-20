@@ -8,7 +8,7 @@ interface Props {
 
 const handleDelete = async (id: string) => {
   console.log(id)
-  const res = await fetch(`http://localhost:3000/api/delete-post`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}:3000/api/delete-post`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
