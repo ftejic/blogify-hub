@@ -53,6 +53,11 @@ function WritePage() {
                 catSlug: category.value
             })
         });
+
+        setCategory({value: "Code", label: "Code"});
+        setDesc("");
+        setFile(null);
+        setTitle("");
         
     };
 

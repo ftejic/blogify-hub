@@ -26,8 +26,8 @@ function MobileMenu() {
             />
             {open && (
                 <div className="flex flex-col gap-3 absolute top-[68px] mr-auto px-5 py-5 left-0 w-full min-h-screen text-center bg-black text-white">
-                    <Link href="/">Home</Link>
-                    <AuthLinks />
+                    <Link href="/" onClick={() => setOpen(false)}>Home</Link>
+                    <AuthLinks setOpen={setOpen}/>
                 </div>
             )}
             

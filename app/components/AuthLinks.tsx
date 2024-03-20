@@ -2,7 +2,7 @@
 import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 
-function AuthLinks() {
+function AuthLinks(props: any) {
 
     const { status } = useSession();
 
@@ -11,8 +11,8 @@ function AuthLinks() {
             {
                 status === "authenticated" ? (
                     <>
-                        <Link href="/my-posts">My Posts</Link>
-                        <Link href="/write">Write</Link>
+                        <Link href="/my-posts" onClick={() => props.setOpen(false)}>My Posts</Link>
+                        <Link href="/write" onClick={() => props.setOpen(false)}>Write</Link>
                         <span onClick={() => signOut()} className='cursor-pointer'>Logout</span>
                         
                     </>            
