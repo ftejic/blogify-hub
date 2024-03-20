@@ -2,18 +2,17 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquarePlus } from '@fortawesome/free-regular-svg-icons';
 import { useEffect, useState } from 'react';
-import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.bubble.css';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { app } from '@/app/utils/firebase'; 
 import Select from 'react-select';
-
+import dynamic from 'next/dynamic';
 
 
 const storage = getStorage(app);
-
+const ReactQuill = dynamic(() => import("react-quill"), {ssr: false});
 
 function WritePage() {
 
@@ -96,7 +95,6 @@ function WritePage() {
         setCategory(selectedOption);
     };
     
-    console.log(category)
 
   return (
     <div className='pt-10'>
