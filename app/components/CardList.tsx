@@ -42,7 +42,7 @@ const getData = async (page: number, cat: string | undefined, myPosts: string | 
     headers: {
       "Cookie": cookie || "",
     },
-    cache: "no-cache"
+    cache: "no-store"
   });
 
   if (!res.ok) {
