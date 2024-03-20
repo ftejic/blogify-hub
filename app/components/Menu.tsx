@@ -47,7 +47,7 @@ async function Menu() {
 
   return (
     <div className="hidden lg:block w-2/6 pl-5 mb-10">
-      <h2 className="text-base text-gray">What's hot</h2>
+      <h2 className="text-base text-gray">What&apos;s hot</h2>
       <h1 className="text-2xl font-bold mb-5 -mt-1">Most Popular</h1>
       <div className="flex flex-col gap-5">
         {data?.posts?.map((item: any) => (
