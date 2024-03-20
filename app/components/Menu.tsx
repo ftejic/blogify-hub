@@ -31,6 +31,7 @@ const getData = async () => {
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/api/most-popular`, {
     method: "GET",
+    cache: "no-store"
   });
 
   if (!res.ok) {
