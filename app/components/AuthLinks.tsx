@@ -13,12 +13,12 @@ function AuthLinks(props: any) {
                     <>
                         <Link href="/my-posts" onClick={() => props.setOpen(false)}>My Posts</Link>
                         <Link href="/write" onClick={() => props.setOpen(false)}>Write</Link>
-                        <span onClick={() => signOut()} className='cursor-pointer'>Logout</span>
+                        <span onClick={() => {signOut(); props.setOpen(false)}} className='cursor-pointer'>Logout</span>
                         
                     </>            
                 ) : (
                     <>
-                        <Link href="/login">Login</Link>
+                        <Link href="/login" onClick={() => props.setOpen(false)}>Login</Link>
                     </>
                 )
             }
