@@ -21,7 +21,7 @@ const getData = async () => {
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/api/featured`, {
     method: "GET",
-    cache: "no-store"
+    cache: "no-cache"
   });
 
   if (!res.ok) {
@@ -36,8 +36,6 @@ const getData = async () => {
 async function Featured() {
 
   const data : Data = await getData();
-  
-  const desc = data.post ? {__html: data?.post?.desc} : {__html: ""};
 
   return (
     <div className='pt-10'>
@@ -56,7 +54,7 @@ async function Featured() {
         <div className={`lg:${data?.post?.img ? 'w-full' : 'w-1/2'} flex items-center`}>
           <div>
             <h1 className='text-2xl md:text-4xl font-bold mb-3 lg:mb-5'>{data?.post?.title}</h1>
-            <div className='line-clamp-5 mb-5' dangerouslySetInnerHTML={desc}/>
+            <div className='line-clamp-5 mb-5' dangerouslySetInnerHTML={{__html: data?.post?.desc}}/>
             <Link href={`posts/${data?.post?.slug}`} className='bg-grayBlue bg-opacity-0 border border-text hover:bg-opacity-100 py-2 px-4'>Read More</Link>
           </div>
           

@@ -15,8 +15,6 @@ interface Props {
 
 const Card = (props : Props) => {
 
-  const desc = {__html: props.desc}
-
   return (
     <div className="flex gap-5 items-center" key={props.id}>
       {
@@ -33,7 +31,7 @@ const Card = (props : Props) => {
         <Link href={`/posts/${props.slug}`}>
           <h1 className="text-2xl font-bold my-3">{props.title}</h1>
         </Link>
-        <div className="line-clamp-4 mb-3 font-light" dangerouslySetInnerHTML={desc} />
+        <div className="line-clamp-4 mb-3 font-light" dangerouslySetInnerHTML={{__html: props.desc}} />
         <Link href={`/posts/${props.slug}`} className="underline underline-offset-4">Read More</Link>
       </div>
     </div>
