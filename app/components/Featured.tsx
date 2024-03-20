@@ -51,7 +51,7 @@ async function Featured() {
               className='object-cover relative'/>
           </div>
         }     
-        <div className={`lg:${data?.post?.img ? 'w-full' : 'w-1/2'} flex items-center`}>
+        <div className={`lg:${data?.post?.img ? 'w-1/2' : 'w-full'} flex items-center`}>
           <div>
             <h1 className='text-2xl md:text-4xl font-bold mb-3 lg:mb-5'>{data?.post?.title}</h1>
             <div className='line-clamp-5 mb-5' dangerouslySetInnerHTML={{__html: data?.post?.desc}}/>
